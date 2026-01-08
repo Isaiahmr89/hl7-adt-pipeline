@@ -24,7 +24,7 @@ def next_event(patient):
 
         if roll < 0.6:
             new_location = choose_new_location(patient["location"])
-            patient["location"] = new_location  
+            patient["location"] = new_location
             patient["state"] = "TRANSFERRED"
             return generate_a02(patient, f"{new_location}^05^B")
 
