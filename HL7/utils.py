@@ -11,7 +11,7 @@ def hl7_timestamp():
 def msh(event_type, message_id):
     return (
         f"MSH|^~\\&|{SENDING_APP}|{FACILITY}|EHR|{FACILITY}"
-        f"|{hl7_timestamp()}|ADT^{event_type}|{message_id}|P|{VERSION}"
+        f"|{hl7_timestamp()}||ADT^{event_type}|{message_id}|P|{VERSION}"
     )
 
 def evn(event_type):

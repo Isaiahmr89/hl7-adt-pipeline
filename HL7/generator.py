@@ -1,5 +1,16 @@
 from lifecycle import init_patient_state, next_event
+from datetime import datetime
+from pathlib import Path
 import random
+
+OUT_DIR = Path("HL7/flows")
+OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+def write_hl7(message, patient_id, trigger):
+    ts = datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
+    filename = OUT_DIR / f"{patient_id}_{trigger}_{ts}.hl7"
+    with open(filename, "w") as f:
+        f.write(message)
 
 PATIENTS = [
     {"patient_id": "00001", "first_name": "John", "last_name": "Doe", "sex": "M"},
@@ -16,6 +27,9 @@ if __name__ == "__main__":
         msg = next_event(patient)
 
         if msg:
+            trigger = msg.split("|")[8].split("^")[1]
+            write_hl7(msg, patient["patient_id"], trigger)
+
             print(msg)
             print("-" * 10)
 

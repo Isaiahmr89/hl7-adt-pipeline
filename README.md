@@ -1,15 +1,34 @@
-**Project Overview:**
+**Project Overview**
 
-This project showcases the integration and transformation of HL7 messages. I will be utilizing a simple stack in the pipelining.
-Although using real patient data would not be accessible, I will have to fabricate my own and generated a mock API where
-HL7 ADT messages are generated, QA'd for validation and converted into FHIR format in order to be stored in a database
-for future ADT dashboard analytics use which will be implemented.
+This project demonstrates an end-to-end healthcare data integration pipeline using HL7 v2 ADT messages. 
+It generates realistic, stateful ADT event flows (admit, transfer, update, discharge), validates message structure 
+and required fields, and transforms validated HL7 messages into FHIR-compliant JSON resources for downstream storage 
+and analytics.
 
-This project will be updated on a CI/CD basis meaning there will be constant updates, integrations and deployments as progression furthers.
+Synthetic patient data is used to simulate real hospital workflows while preserving realistic message structure and 
+event sequencing. The pipeline is designed to support auditing, replay, and future analytics use cases such as ADT 
+dashboards.
 
-**Tech Stack Overview:**
-Python scripting (mock HL7 message creation)
-Flask API (web interfacing HTTP/TCP, POST/GET operations)
-PostgreSQL (relational database curated storage)
-Power BI (dashboard analytics)
-AWS S3 (future cloud integration and storage)
+**Current Capabilities**
+
+Stateful HL7 ADT message generation (A01, A02, A03, A08)
+Multi-patient, realistic hospital event flows
+HL7 envelope, structural, and field-level validation (QA pipeline)
+HL7 → FHIR transformation (Patient and Encounter resources)
+Replayable HL7 message datasets for testing and analysis
+
+**Tech Stack**
+
+Python – HL7 message generation, validation, and transformation
+Flask – API layer for HL7 ingestion (in progress)
+PostgreSQL – Structured storage for raw HL7 and FHIR JSON (planned)
+Power BI – Analytics and dashboarding (planned)
+AWS S3 – Cloud storage for raw message archival (planned)
+
+**Roadmap**
+
+API-based HL7 ingestion with validation and transformation
+PostgreSQL persistence (raw HL7, validation results, FHIR JSON)
+Containerization with Docker Compose
+CI with automated validation tests
+Analytics dashboards based on ADT event data
